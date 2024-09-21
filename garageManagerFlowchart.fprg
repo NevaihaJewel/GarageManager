@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="3.0">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="nevai"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2023-10-22 06:37:43 PM"/>
+        <attribute name="created" value="bmV2YWk7REVTS1RPUC1NSjkxMTFCOzIwMjMtMTAtMTg7MDc6MzE6MDIgUE07MjgwOQ=="/>
+        <attribute name="edited" value="bmV2YWk7REVTS1RPUC1NSjkxMTFCOzIwMjMtMTAtMjI7MDY6Mzc6NDMgUE07NDsyOTI1"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="totalHours, totalCharge, charge" type="Real" array="False" size=""/>
+            <declare name="hours" type="Real" array="True" size="3"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <assign variable="totalHours" expression="0.0"/>
+            <assign variable="totalCharge" expression="0.0"/>
+            <for variable="i" start="0" end="2" direction="inc" step="1">
+                <output expression="&quot;Enter the number of hours for customer #&quot; &amp;i+1" newline="True"/>
+                <input variable="hours[i]"/>
+            </for>
+            <output expression="&quot;CAR : HOURS : CHARGE&quot;" newline="True"/>
+            <for variable="i" start="0" end="2" direction="inc" step="1">
+                <assign variable="charge" expression="calcCharges(hours[i])"/>
+                <output expression="i+1&amp;&quot;      :  &quot;&amp;hours[i]&amp;&quot;           :  $&quot;&amp;charge" newline="True"/>
+                <assign variable="totalHours" expression="totalHours+hours[i]"/>
+                <assign variable="totalCharge" expression="totalCharge+charge"/>
+            </for>
+            <output expression="&quot;TOTAL&quot;" newline="True"/>
+            <output expression="totalHours&amp;&quot; hours&quot;" newline="True"/>
+            <output expression="&quot;$&quot;&amp;totalCharge" newline="True"/>
+        </body>
+    </function>
+    <function name="calcCharges" type="Real" variable="charge">
+        <parameters>
+            <parameter name="hours" type="Real" array="False"/>
+        </parameters>
+        <body>
+            <declare name="charge" type="Real" array="False" size=""/>
+            <if expression="hours &lt;= 3.0">
+                <then>
+                    <assign variable="charge" expression="20.0"/>
+                </then>
+                <else>
+                    <if expression="hours &lt;= 24.0">
+                        <then>
+                            <assign variable="charge" expression="20.0+5.0*(hours-3)"/>
+                        </then>
+                        <else>
+                            <assign variable="charge" expression="50.0"/>
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>
